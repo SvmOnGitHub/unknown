@@ -4,7 +4,7 @@ local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloo
 
 local w = library:CreateWindow("vSam#3678 Hoopz Gui")
 
-local b = w:CreateFolder("MainLOL")
+local b = w:CreateFolder("Main")
 
 b:Button("vSam#3678 Aimbot",function()
 
@@ -265,7 +265,7 @@ local humRootPart = game:GetService("Players").LocalPlayer.Character.HumanoidRoo
 
 spawn(function()
 while mag do
-wait()
+wait(0.1)
 local magDistance = (humRootPart.Position - getClosestBasketball().Position).magnitude
 if magDistance <= magRange then
 firetouchinterest(humRootPart, getClosestBasketball(), 0)
