@@ -4,7 +4,7 @@ local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloo
 
 local w = library:CreateWindow("vSam#3678 Hoopz Gui")
 
-local b = w:CreateFolder("Main")
+local b = w:CreateFolder("MainLOL")
 
 b:Button("vSam#3678 Aimbot",function()
 
