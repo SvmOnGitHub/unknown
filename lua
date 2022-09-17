@@ -265,7 +265,7 @@ local humRootPart = game:GetService("Players").LocalPlayer.Character.HumanoidRoo
 
 spawn(function()
 while mag do
-wait(0.1)
+wait()
 local magDistance = (humRootPart.Position - getClosestBasketball().Position).magnitude
 if magDistance <= magRange then
 firetouchinterest(humRootPart, getClosestBasketball(), 0)
