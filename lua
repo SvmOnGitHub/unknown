@@ -241,7 +241,7 @@ b:Toggle("Ball Mag",function(bool)
 
 getgenv().mag = bool
 
-getgenv().magRange = 0
+getgenv().magRange = 25
 
 
 function getClosestBasketball()
