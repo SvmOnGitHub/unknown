@@ -414,6 +414,10 @@ while wait() do
     end
 end)
 
+b:Button("Reset",function()
+game:GetService("Players").LocalPlayer.Character.Humanoid.Health = 0
+end)
+
 local b = w:CreateFolder("Server Options")
 
 b:Button("New Server",function()
