@@ -105,6 +105,7 @@ end)
 
 spawn(function()
 while wait() do
+if _G.aim and _G.aimToggle then
 local playerAndHoopDistance = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - getClosest().Position).magnitude
 if playerAndHoopDistance <= 74 then
     game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("AimbotGui").AimbotFrame.RangeText.Text = "In Range"
@@ -112,6 +113,8 @@ if playerAndHoopDistance <= 74 then
 elseif playerAndHoopDistance > 74 then
 game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("AimbotGui").AimbotFrame.RangeText.Text = "Out Of Range"
 game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("AimbotGui").AimbotFrame.RangeText.TextColor3 = Color3.new(255, 0, 0)
+if _G.aim == false then return end
+end
 end
 end
 end)
