@@ -114,7 +114,6 @@ game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("AimbotGui").Aimbo
 game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("AimbotGui").AimbotFrame.RangeText.TextColor3 = Color3.new(255, 0, 0)
 end
 end
-end
 end)
 
 
