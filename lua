@@ -6,38 +6,18 @@ local w = library:CreateWindow("vSam#3678 Hoopz Gui")
 
 local b = w:CreateFolder("Main")
 
-b:Button("vSam#3678 Aimbot",function()
-
--- Variables
-
-local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
-local UIS = game:GetService("UserInputService")
-local VIM = game:GetService("VirtualInputManager")
-local camera = game:GetService("Workspace").CurrentCamera
-local cameraMode = game:GetService("Players").LocalPlayer.CameraMode
-
--- Gets Closest Hoop
-
-function getClosest()
-    local closestDistance = math.huge
-    local closestRim = nil
-    for i,v in pairs(game:GetService("Workspace").Courts:GetDescendants()) do
-        if v.Name == "hoop" then
-        local distance = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
-        if distance < closestDistance then
-            closestDistance = distance
-            closestRim = v
-        end
-        end
+b:Toggle("vSam#3678 Aimbot",function(bool)
+_G.aimToggle = bool
+spawn(function()
+if _G.aimToggle == false then
+game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("AimbotGui"):Destroy()
+for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetChildren()) do
+    if v.Name == "AimbotGui" then
+        v:Destroy()
     end
-    return closestRim
 end
-
-
-
-
--- Aimbot Gui
-
+elseif _G.aimToggle == true then
+    
 local AimbotGui = Instance.new("ScreenGui")
 local AimbotFrame = Instance.new("Frame")
 local RangeText = Instance.new("TextLabel")
@@ -67,19 +47,49 @@ RangeText.Text = "Out Of Range"
 RangeText.TextColor3 = Color3.fromRGB(255, 0, 0)
 RangeText.TextSize = 40.000
 RangeText.TextWrapped = true
+end
+end)
+end)
+
+
+spawn(function()
+-- Variables
+
+local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
+local UIS = game:GetService("UserInputService")
+local VIM = game:GetService("VirtualInputManager")
+local camera = game:GetService("Workspace").CurrentCamera
+local cameraMode = game:GetService("Players").LocalPlayer.CameraMode
+
+-- Gets Closest Hoop
+
+function getClosest()
+    local closestDistance = math.huge
+    local closestRim = nil
+    for i,v in pairs(game:GetService("Workspace").Courts:GetDescendants()) do
+        if v.Name == "hoop" then
+        local distance = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
+        if distance < closestDistance then
+            closestDistance = distance
+            closestRim = v
+        end
+        end
+    end
+    return closestRim
+end
+
+
+
 
 
 -- Opens And Closes Gui When Player Has/ Has Not Got The Ball
 
 spawn(function()
 while wait() do
-if Basketball.Parent == game:GetService("Players").LocalPlayer.Character then
-AimbotFrame.Visible = true
-end
-repeat wait() until Basketball.Parent ~= game:GetService("Players").LocalPlayer.Character
-AimbotFrame.Visible = false
 game:GetService("Players").LocalPlayer.Character:WaitForChild("Basketball")
-AimbotFrame.Visible = true
+game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("AimbotGui").AimbotFrame.Visible = true
+repeat wait() until game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool") == nil
+game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("AimbotGui").AimbotFrame.Visible = false
 end
 end)
 
@@ -94,15 +104,14 @@ end)
 -- In Range And Out Of Range
 
 spawn(function()
-game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("AimbotGui")
 while wait() do
 local playerAndHoopDistance = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - getClosest().Position).magnitude
 if playerAndHoopDistance <= 74 then
-    RangeText.Text = "In Range"
-    RangeText.TextColor3 = Color3.new(0, 255, 0)
+    game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("AimbotGui").AimbotFrame.RangeText.Text = "In Range"
+    game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("AimbotGui").AimbotFrame.RangeText.TextColor3 = Color3.new(0, 255, 0)
 elseif playerAndHoopDistance > 74 then
-RangeText.Text = "Out Of Range"
-RangeText.TextColor3 = Color3.new(255, 0, 0)
+game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("AimbotGui").AimbotFrame.RangeText.Text = "Out Of Range"
+game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("AimbotGui").AimbotFrame.RangeText.TextColor3 = Color3.new(255, 0, 0)
 end
 end
 end)
@@ -129,7 +138,7 @@ end
 
 spawn(function()
     while wait() do
-        if _G.aim then
+        if _G.aim and _G.aimToggle then
         local power = game:GetService("Players").LocalPlayer.Power
         local playerAndHoopDistance2 = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - getClosest().Position).magnitude
         if playerAndHoopDistance2 <= 74 and playerAndHoopDistance2 > 61.9 then
@@ -157,8 +166,9 @@ end)
 -- The Aimbot
 
 UIS.InputBegan:Connect(function(inp)
-    if inp.KeyCode == Enum.KeyCode.Space and RangeText.Text == "In Range" then
+    if inp.KeyCode == Enum.KeyCode.Space and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("AimbotGui").AimbotFrame.RangeText.Text == "In Range" then
         if game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+            if _G.aimToggle then
         _G.aim = true
         spawn(function()
             local ping = game:GetService("Players").LocalPlayer.Ping
@@ -199,6 +209,7 @@ UIS.InputBegan:Connect(function(inp)
             else
                 camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 70, 0))
             if _G.aim == false then return end
+                    end
                 end
             end
         end
