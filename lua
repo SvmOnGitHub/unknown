@@ -141,9 +141,9 @@ spawn(function()
         if _G.aim and _G.aimToggle then
         local power = game:GetService("Players").LocalPlayer.Power
         local playerAndHoopDistance2 = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - getClosest().Position).magnitude
-        if playerAndHoopDistance2 <= 74 and playerAndHoopDistance2 > 63 then
+        if playerAndHoopDistance2 <= 74 and playerAndHoopDistance2 > 63.65 then
             power.Value = 85
-        elseif playerAndHoopDistance2 <= 63 and playerAndHoopDistance2 > 46.35 then
+        elseif playerAndHoopDistance2 <= 63.65 and playerAndHoopDistance2 > 46.35 then
             power.Value = 80
         elseif playerAndHoopDistance2 <= 46.35 then
             power.Value = 75
@@ -206,7 +206,7 @@ UIS.InputBegan:Connect(function(inp)
             elseif playerAndHoopDistance3 <= 68 and playerAndHoopDistance3 >= 66 then
                 camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 65, 0))
             if _G.aim == false then return end
-             elseif playerAndHoopDistance3 <= 62.4 and playerAndHoopDistance3 >= 62.1 then
+             elseif playerAndHoopDistance3 <= 63.4 and playerAndHoopDistance3 >= 62 then
                 camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 55, 0))
                 if _G.aim == false then return end
             else
@@ -363,6 +363,23 @@ b:Toggle("Anti Travel",function(bool)
 	end
 end)
 
+b:Toggle("Anti Fall",function(bool)
+_G.antiFall = bool
+end)
+
+spawn(function()
+game:GetService("Players").LocalPlayer.Character.Humanoid:GetPropertyChangedSignal('PlatformStand'):Connect(function()
+if game:GetService("Players").LocalPlayer.Character.Humanoid.PlatformStand == true and _G.antiFall then
+game:GetService("Players").LocalPlayer.Character.Humanoid.PlatformStand = false
+game:GetService("Players").LocalPlayer.Character.Humanoid.AutoRotate = true
+elseif game:GetService("Players").LocalPlayer.Character.Humanoid.PlatformStand == true and _G.antiFall == false then
+return;
+end
+end)  
+end)
+
+
+
 
 local b = w:CreateFolder("Intros")
 
@@ -395,11 +412,14 @@ b:Slider("WalkSpeed",{
     max = 19;
     precise = true;
 },function(value)
-function getWalkSpeed()
-    return value
-end
-while wait() do
-    game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = getWalkSpeed()
+_G.Speed = value
+    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):GetPropertyChangedSignal("WalkSpeed"))) do
+        v:Disable()
+    end
+    while wait() do
+        if game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed ~= 0 then
+        game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = _G.Speed
+        end
     end
 end)
 
