@@ -2,6 +2,8 @@
 
 local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
 
+if game:GetService("Players").LocalPlayer.UserId == 123456 or game:GetService("Players").LocalPlayer.UserId == 123456 then
+
 local w = library:CreateWindow("vSam#3678 Hoopz Gui")
 
 local b = w:CreateFolder("Main")
@@ -439,6 +441,16 @@ while wait() do
     end
 end)
 
+
+b:Slider("Hip Height",{
+    min = 0;
+    max = 3;
+    precise = true;
+},function(value)
+    game:GetService("Players").LocalPlayer.Character.Humanoid.HipHeight = value
+end)
+
+
 b:Button("Reset",function()
 game:GetService("Players").LocalPlayer.Character.Humanoid.Health = 0
 end)
@@ -526,3 +538,9 @@ wait()
 until game:IsLoaded() 
 game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,game.JobId) 
 end)
+else
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "Not Whitelisted",
+	Text = "DM vSam#3678 On Discord To Whitelist",
+})
+end
