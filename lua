@@ -284,6 +284,7 @@ while mag do
 wait()
 local magDistance = (humRootPart.Position - getClosestBasketball().Position).magnitude
 if magDistance <= magRange then
+wait()
 firetouchinterest(humRootPart, getClosestBasketball(), 0)
 wait(0.001)
 firetouchinterest(humRootPart, getClosestBasketball(), 1)
