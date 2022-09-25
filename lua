@@ -169,7 +169,7 @@ end)
 
 UIS.InputBegan:Connect(function(inp)
     if inp.KeyCode == Enum.KeyCode.Space and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("AimbotGui").AimbotFrame.RangeText.Text == "In Range" then
-        if game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+        if game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool") and game:GetService("Players").LocalPlayer.Character.Humanoid.Jump then
             if _G.aimToggle then
         _G.aim = true
         spawn(function()
