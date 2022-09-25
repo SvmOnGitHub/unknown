@@ -1,8 +1,5 @@
--- vSam#3678 Hoopz Gui
-
-local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
-
 if game:GetService("Players").LocalPlayer.UserId == 123456 or game:GetService("Players").LocalPlayer.UserId == 123456 then
+
 -- vSam#3678 Hoopz Gui
 
 local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
@@ -346,6 +343,65 @@ until game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("To
 end
 end)
 end)
+
+
+b:Toggle("Auto Dunk",function(bool)
+_G.autoDunk = bool
+
+function getCourt()
+    local closestDistance = math.huge
+    local closestCourt = nil
+    for i,v in pairs(game:GetService("Workspace").Courts:GetDescendants()) do
+        if v.Name == "CourtFloor" then
+        local distance = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
+        if distance < closestDistance then
+            closestDistance = distance
+            closestCourt = v
+        end
+        end
+    end
+    return closestCourt.Parent.Parent.Parent
+end
+
+
+function getClosest()
+    local closestDistance = math.huge
+    local closestRim = nil
+    for i,v in pairs(game:GetService("Workspace").Courts:GetDescendants()) do
+        if v.Name == "hoop" then
+        local distance = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
+        if distance < closestDistance then
+            closestDistance = distance
+            closestRim = v
+        end
+        end
+    end
+    return closestRim
+end
+
+
+
+function returnDunkDistance()
+local dunkDistance = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - getClosest().Position).magnitude
+return dunkDistance   
+end
+
+spawn(function()
+while _G.autoDunk do
+wait()
+if returnDunkDistance() <= 28 then
+local args = {
+    [1] = game:GetService("Players").LocalPlayer.Character:WaitForChild("Basketball")
+}
+
+getCourt().FieldGoal.dunkFunction:InvokeServer(unpack(args))
+if _G.autoDunk == false then return end
+end
+end
+end)
+end)
+
+
 
 b:Toggle("Anti Travel",function(bool)
 
