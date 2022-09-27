@@ -336,7 +336,7 @@ spawn(function()
 local RS = game:GetService("RunService")
 RS.RenderStepped:Connect(function()
 if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - findClosestPlayer().Character.HumanoidRootPart.Position).magnitude <= 30 and findClosestPlayer().Character:FindFirstChild("Basketball") and _G.lookAt == true then
-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(findClosestPlayer().Character.Basketball.Ball.Position.X, game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position.Y, findClosestPlayer().Character.Basketball.Ball.Position.Z))
+game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(findClosestPlayer().Character.HumanoidRootPart.Position.X, game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position.Y, findClosestPlayer().Character.HumanoidRootPart.Position.Z))
 if game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool") or _G.lookAt == false then return end
 end
 end)
