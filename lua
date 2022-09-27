@@ -332,15 +332,26 @@ function findClosestPlayer()
     return closestPlayer2
 end
 
+spawn(function()
+local RS = game:GetService("RunService")
+RS.RenderStepped:Connect(function()
+if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - findClosestPlayer().Character.HumanoidRootPart.Position).magnitude <= 30 and findClosestPlayer().Character:FindFirstChild("Basketball") and _G.lookAt == true then
+game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(findClosestPlayer().Character.Basketball.Ball.Position.X, game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position.Y, findClosestPlayer().Character.Basketball.Ball.Position.Z))
+if game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool") or _G.lookAt == false then return end
+end
+end)
+end)
 
 
 
 spawn(function()
 if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - findClosestPlayer().Character.HumanoidRootPart.Position).magnitude <= 30 and findClosestPlayer().Character:FindFirstChild("Basketball") then
 repeat
+_G.lookAt = true
 wait()
 game:GetService("Players").LocalPlayer.Character.Humanoid.WalkToPoint = findClosestPlayer().Character["HumanoidRootPart"].Position + Vector3.new(findClosestPlayer().Character.Humanoid.MoveDirection.X * 4, findClosestPlayer().Character.Humanoid.MoveDirection.Y, findClosestPlayer().Character.Humanoid.MoveDirection.Z * 5.5)
 until game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool") or findClosestPlayer().Character:FindFirstChildOfClass("Tool") == nil
+_G.lookAt = false
 end
 end)
 end)
@@ -600,8 +611,8 @@ until game:IsLoaded()
 game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,game.JobId) 
 end)
 else
-game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "Not Whitelisted",
-	Text = "DM vSam#3678 On Discord To Whitelist",
-})
+game:GetService("StarterGui"):SetCore("SendNotification",{	
+	Title = "Not Whitelisted",	
+	Text = "DM vSam#3678 On Discord To Whitelist",	
+})	
 end
