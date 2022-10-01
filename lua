@@ -8,7 +8,7 @@ local w = library:CreateWindow("vSam#3678 Hoopz Gui")
 
 local b = w:CreateFolder("Main")
 
-b:Toggle("vSam#3678 Aimbot",function(bool)
+b:Toggle("Aimbot",function(bool)
 _G.aimToggle = bool
 spawn(function()
 if _G.aimToggle == false then
@@ -249,6 +249,44 @@ end
 end)
 end)
 
+b:Toggle("Reach",function(bool)
+
+_G.ReachPlayer = bool
+
+
+function findClosestPlayerWithBall()
+local closestPlayerWithBasketball = nil
+local closestDistance = math.huge
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+    if v.Name ~= game:GetService("Players").LocalPlayer.Name and v.Character:FindFirstChildOfClass("Tool") then
+        local distance = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).magnitude
+                if distance < closestDistance then
+                closestDistance = distance
+                closestPlayerWithBasketball = v
+                end
+            end
+        end
+    return closestPlayerWithBasketball
+end
+end)
+
+spawn(function()
+local RunService = game:GetService("RunService")
+RunService.RenderStepped:Connect(function()
+wait()
+if _G.ReachPlayer then
+if not game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - findClosestPlayerWithBall().Character.HumanoidRootPart.Position).magnitude <= 7 then
+firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, findClosestPlayerWithBall().Character.Basketball.Ball, 0)
+wait(0.001)
+firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, findClosestPlayerWithBall().Character.Basketball.Ball, 1)
+end
+end
+end
+end)
+end)
+
+
 _G.magRange = 25
 
 b:Toggle("Ball Mag",function(bool)
@@ -301,6 +339,7 @@ b:Slider("Ball Mag Range",{
 },function(value)
 _G.magRange = value
 end)
+
 
 
 b:Bind("Auto Guard",Enum.KeyCode.X,function()
