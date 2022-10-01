@@ -1,10 +1,10 @@
 if game:GetService("Players").LocalPlayer.UserId == 123456 or game:GetService("Players").LocalPlayer.UserId == 123456 then
 
--- vSam#3678 Hoopz Gui
+-- vSam's Hub
 
 local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
 
-local w = library:CreateWindow("vSam#3678 Hoopz Gui")
+local w = library:CreateWindow("vSam's Hub")
 
 local b = w:CreateFolder("Main")
 
