@@ -276,7 +276,7 @@ RunService.RenderStepped:Connect(function()
 wait()
 if _G.ReachPlayer then
 if not game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool") then
-if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - findClosestPlayerWithBall().Character.HumanoidRootPart.Position).magnitude <= 10 then
+if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - findClosestPlayerWithBall().Character.HumanoidRootPart.Position).magnitude <= 7 then
 firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, findClosestPlayerWithBall().Character.Basketball.Ball, 0)
 wait(0.001)
 firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, findClosestPlayerWithBall().Character.Basketball.Ball, 1)
