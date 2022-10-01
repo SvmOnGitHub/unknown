@@ -277,7 +277,6 @@ spawn(function()
 while _G.mag == true do
 wait()
 if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - getClosestBasketball().Position).magnitude <= _G.magRange then
-print(_G.magRange)
 wait()
 firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, getClosestBasketball(), 0)
 wait(0.001)
