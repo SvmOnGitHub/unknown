@@ -249,26 +249,23 @@ end
 end)
 end)
 
-
+_G.magRange = 25
 
 b:Toggle("Ball Mag",function(bool)
 
 -- Ball Mag
 
-getgenv().mag = bool
-
-getgenv().magRange = 25
-
+_G.mag = bool
 
 function getClosestBasketball()
     local closestDistance = math.huge
     local closestBasketball = nil
-    for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
-        if v.Name == "Ball" then
-            local distance = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
+    for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+        if v.Name == "Basketball" then
+            local distance = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - v.Ball.Position).magnitude
             if distance < closestDistance then
                 closestDistance = distance
-                closestBasketball = v
+                closestBasketball = v.Ball
             end
         end
     end
@@ -276,18 +273,16 @@ function getClosestBasketball()
 end
 
 
-local humRootPart = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
-
-
 spawn(function()
-while mag do
+while _G.mag == true do
 wait()
-local magDistance = (humRootPart.Position - getClosestBasketball().Position).magnitude
-if magDistance <= magRange then
+if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - getClosestBasketball().Position).magnitude <= _G.magRange then
+print(_G.magRange)
 wait()
-firetouchinterest(humRootPart, getClosestBasketball(), 0)
+firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, getClosestBasketball(), 0)
 wait(0.001)
-firetouchinterest(humRootPart, getClosestBasketball(), 1)
+firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, getClosestBasketball(), 1)
+if _G.mag == false then return end
 end
 end
 end)
@@ -305,7 +300,7 @@ b:Slider("Ball Mag Range",{
     max = 25; -- max value of the slider
     precise = true; -- max 2 decimals
 },function(value)
-magRange = value
+_G.magRange = value
 end)
 
 
@@ -333,25 +328,11 @@ function findClosestPlayer()
 end
 
 spawn(function()
-local RS = game:GetService("RunService")
-RS.RenderStepped:Connect(function()
-if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - findClosestPlayer().Character.HumanoidRootPart.Position).magnitude <= 30 and findClosestPlayer().Character:FindFirstChild("Basketball") and _G.lookAt == true then
-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(findClosestPlayer().Character.HumanoidRootPart.Position.X, game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position.Y, findClosestPlayer().Character.HumanoidRootPart.Position.Z))
-if game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool") or _G.lookAt == false then return end
-end
-end)
-end)
-
-
-
-spawn(function()
 if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - findClosestPlayer().Character.HumanoidRootPart.Position).magnitude <= 30 and findClosestPlayer().Character:FindFirstChild("Basketball") then
 repeat
-_G.lookAt = true
 wait()
 game:GetService("Players").LocalPlayer.Character.Humanoid.WalkToPoint = findClosestPlayer().Character["HumanoidRootPart"].Position + Vector3.new(findClosestPlayer().Character.Humanoid.MoveDirection.X * 4, findClosestPlayer().Character.Humanoid.MoveDirection.Y, findClosestPlayer().Character.Humanoid.MoveDirection.Z * 5.5)
 until game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool") or findClosestPlayer().Character:FindFirstChildOfClass("Tool") == nil
-_G.lookAt = false
 end
 end)
 end)
