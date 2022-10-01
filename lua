@@ -304,7 +304,29 @@ _G.magRange = value
 end)
 
 
-
+b:Bind("Reach (Longarm)",Enum.KeyCode.Z,function()
+spawn(function()
+local plr = game:GetService("Players").LocalPlayer
+for i,v in pairs(getconnections(plr.Character["Left Arm"]:GetPropertyChangedSignal("Size"))) do
+        v:Disable()
+    end
+for i,v in pairs(getconnections(plr.Character["Right Arm"]:GetPropertyChangedSignal("Size"))) do
+        v:Disable()
+end
+end)
+spawn(function()
+local plr2 = game:GetService("Players").LocalPlayer
+if plr2.Character["Left Arm"].Size == Vector3.new(1, 2, 1) and plr2.Character["Right Arm"].Size == Vector3.new(1, 2, 1) then
+plr2.Character["Left Arm"].Size = Vector3.new(20, 3, 1)
+plr2.Character["Right Arm"].Size = Vector3.new(20, 3, 1)
+plr2.Character["Left Arm"].Massless = true
+plr2.Character["Right Arm"].Massless = true
+elseif plr2.Character["Left Arm"].Size == Vector3.new(20, 3, 1) and plr2.Character["Right Arm"].Size == Vector3.new(20, 3, 1) then
+plr2.Character["Left Arm"].Size = Vector3.new(1, 2, 1)
+plr2.Character["Right Arm"].Size = Vector3.new(1, 2, 1)
+end
+end)
+end)
 
 
 
