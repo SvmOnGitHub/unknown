@@ -1,4 +1,4 @@
-if game:GetService("Players").LocalPlayer.UserId == 123456 or game:GetService("Players").LocalPlayer.UserId == 123456 then
+if game:GetService("Players").LocalPlayer.UserId == 123456 or game:GetService("Players").LocalPlayer.UserId == 3934009832 then
 
 -- vSam's Hub
 
