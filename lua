@@ -145,9 +145,9 @@ spawn(function()
         local playerAndHoopDistance2 = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - getClosest().Position).magnitude
         if playerAndHoopDistance2 <= 74 and playerAndHoopDistance2 > 63.65 then
             power.Value = 85
-        elseif playerAndHoopDistance2 <= 63.65 and playerAndHoopDistance2 > 46.35 then
+        elseif playerAndHoopDistance2 <= 63.65 and playerAndHoopDistance2 > 47.35 then
             power.Value = 80
-        elseif playerAndHoopDistance2 <= 46.35 then
+        elseif playerAndHoopDistance2 <= 47.35 then
             power.Value = 75
             if _G.aim == false then return end
             end
@@ -193,8 +193,11 @@ UIS.InputBegan:Connect(function(inp)
             if playerAndHoopDistance3 <= 61.999999 and playerAndHoopDistance3 >= 59 then
             camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 60, 0))
             if _G.aim == false then return end
-            elseif playerAndHoopDistance3 <= 46.35 and playerAndHoopDistance3 >= 39 then
+            elseif playerAndHoopDistance3 <= 47.35 and playerAndHoopDistance3 >= 39 then
                 camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 65, 0))
+            if _G.aim == false then return end
+            elseif playerAndHoopDistance3 <= 48.85 and playerAndHoopDistance3 >= 47.35 then
+                camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 75, 0))
             if _G.aim == false then return end
             elseif playerAndHoopDistance3 <= 58.999999 and playerAndHoopDistance3 >= 55 then
                 camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 65, 0))
