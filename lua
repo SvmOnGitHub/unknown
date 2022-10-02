@@ -253,6 +253,21 @@ b:Toggle("Reach",function(bool)
 
 _G.ReachPlayer = bool
 
+function getNearestPart(torso)
+   local dist, part = 9e9
+   for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
+       if v:IsA("Part") and torso then
+           local mag = (v.Position - torso.Position).Magnitude
+           if dist > mag then
+               dist = mag
+               part = v
+           end
+       end
+   end
+   return part
+end
+
+
 
 function findClosestPlayerWithBall()
 local closestPlayerWithBasketball = nil
@@ -273,14 +288,10 @@ end)
 spawn(function()
 local RunService = game:GetService("RunService")
 RunService.RenderStepped:Connect(function()
-if _G.ReachPlayer then
-if not game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool") then
-if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - findClosestPlayerWithBall().Character.HumanoidRootPart.Position).magnitude <= 10 then
-firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, findClosestPlayerWithBall().Character.Basketball.Ball, 0)
+if _G.ReachPlayer and not game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool") and (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - findClosestPlayerWithBall().Character.HumanoidRootPart.Position).magnitude <= 10 then
+firetouchinterest(getNearestPart(findClosestPlayerWithBall().Character.Torso), findClosestPlayerWithBall().Character.Basketball.Ball, 0)
 wait()
-firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, findClosestPlayerWithBall().Character.Basketball.Ball, 1)
-end
-end
+firetouchinterest(getNearestPart(findClosestPlayerWithBall().Character.Torso), findClosestPlayerWithBall().Character.Basketball.Ball, 1)
 end
 end)
 end)
