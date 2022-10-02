@@ -193,7 +193,7 @@ UIS.InputBegan:Connect(function(inp)
             if playerAndHoopDistance3 <= 61.999999 and playerAndHoopDistance3 >= 59 then
             camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 60, 0))
             if _G.aim == false then return end
-            elseif playerAndHoopDistance3 <= 46.35 and playerAndHoopDistance3 >= 39.5 then
+            elseif playerAndHoopDistance3 <= 46.35 and playerAndHoopDistance3 >= 39 then
                 camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 65, 0))
             if _G.aim == false then return end
             elseif playerAndHoopDistance3 <= 58.999999 and playerAndHoopDistance3 >= 55 then
@@ -290,7 +290,6 @@ local RunService = game:GetService("RunService")
 RunService.RenderStepped:Connect(function()
 if _G.ReachPlayer and not game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool") and (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - findClosestPlayerWithBall().Character.HumanoidRootPart.Position).magnitude <= 10 then
 firetouchinterest(getNearestPart(findClosestPlayerWithBall().Character.Torso), findClosestPlayerWithBall().Character.Basketball.Ball, 0)
-wait()
 firetouchinterest(getNearestPart(findClosestPlayerWithBall().Character.Torso), findClosestPlayerWithBall().Character.Basketball.Ball, 1)
 end
 end)
