@@ -55,6 +55,7 @@ end)
 
 
 spawn(function()
+    
 -- Variables
 
 local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
@@ -217,7 +218,7 @@ UIS.InputBegan:Connect(function(inp)
             elseif playerAndHoopDistance3 <= 63.1 and playerAndHoopDistance3 >= 62 then
                 camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 55, 0))
                 if _G.aim == false then return end
-            elseif playerAndHoopDistance3 <= 63.55 and playerAndHoopDistance3 >= 63.1 then
+            elseif playerAndHoopDistance3 <= 63.55 and playerAndHoopDistance3 >= 63.12 then
                 camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 72.5, 0))
                 if _G.aim == false then return end
             else
