@@ -215,7 +215,7 @@ UIS.InputBegan:Connect(function(inp)
             elseif playerAndHoopDistance3 <= 68 and playerAndHoopDistance3 >= 66 then
                 camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 65, 0))
             if _G.aim == false then return end
-            elseif playerAndHoopDistance3 <= 63.1 and playerAndHoopDistance3 >= 62 then
+            elseif playerAndHoopDistance3 <= 63.12 and playerAndHoopDistance3 >= 62 then
                 camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 55, 0))
                 if _G.aim == false then return end
             elseif playerAndHoopDistance3 <= 63.55 and playerAndHoopDistance3 >= 63.12 then
