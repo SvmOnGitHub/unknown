@@ -194,13 +194,10 @@ UIS.InputBegan:Connect(function(inp)
             if playerAndHoopDistance3 <= 61.999999 and playerAndHoopDistance3 >= 59 then
             camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 60, 0))
             if _G.aim == false then return end
-            elseif playerAndHoopDistance3 <= 47 and playerAndHoopDistance3 >= 39 then
+            elseif playerAndHoopDistance3 <= 47.2 and playerAndHoopDistance3 >= 39 then
                 camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 65, 0))
             if _G.aim == false then return end
-            elseif playerAndHoopDistance3 <= 47.35 and playerAndHoopDistance3 >= 47 then
-                camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 76.5, 0))
-            if _G.aim == false then return end
-            elseif playerAndHoopDistance3 <= 49.1 and playerAndHoopDistance3 >= 47.35 then
+            elseif playerAndHoopDistance3 <= 49.1 and playerAndHoopDistance3 >= 47.2 then
                 camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 75, 0))
             if _G.aim == false then return end
             elseif playerAndHoopDistance3 <= 58.999999 and playerAndHoopDistance3 >= 55 then
@@ -215,10 +212,10 @@ UIS.InputBegan:Connect(function(inp)
             elseif playerAndHoopDistance3 <= 68 and playerAndHoopDistance3 >= 66 then
                 camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 65, 0))
             if _G.aim == false then return end
-            elseif playerAndHoopDistance3 <= 63.25 and playerAndHoopDistance3 >= 62 then
+            elseif playerAndHoopDistance3 <= 63.3 and playerAndHoopDistance3 >= 62 then
                 camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 55, 0))
                 if _G.aim == false then return end
-            elseif playerAndHoopDistance3 <= 63.6 and playerAndHoopDistance3 >= 63.25 then
+            elseif playerAndHoopDistance3 <= 63.65 and playerAndHoopDistance3 >= 63.3 then
                 camera.CFrame = CFrame.new(camera.CFrame.Position, getClosest().Position + Vector3.new(0, 72.5, 0))
                 if _G.aim == false then return end
             else
