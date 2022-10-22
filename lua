@@ -144,11 +144,11 @@ spawn(function()
         if _G.aim and _G.aimToggle then
         local power = game:GetService("Players").LocalPlayer.Power
         local playerAndHoopDistance2 = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - getClosest().Position).magnitude
-        if playerAndHoopDistance2 <= 74 and playerAndHoopDistance2 > 63.65 then
+        if playerAndHoopDistance2 <= 74 and playerAndHoopDistance2 > 63.6 then
             power.Value = 85
-        elseif playerAndHoopDistance2 <= 63.65 and playerAndHoopDistance2 > 47.35 then
+        elseif playerAndHoopDistance2 <= 63.6 and playerAndHoopDistance2 > 47.3 then
             power.Value = 80
-        elseif playerAndHoopDistance2 <= 47.35 then
+        elseif playerAndHoopDistance2 <= 47.3 then
             power.Value = 75
             if _G.aim == false then return end
             end
