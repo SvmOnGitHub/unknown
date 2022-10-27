@@ -376,14 +376,18 @@ function findClosestPlayer()
     return closestPlayer2
 end
 
-spawn(function()
 if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - findClosestPlayer().Character.HumanoidRootPart.Position).magnitude <= 30 and findClosestPlayer().Character:FindFirstChild("Basketball") then
-repeat
-wait()
+game:GetService("Players").LocalPlayer.Character.Humanoid.AutoRotate = false
+spawn(function()
+while wait() do
 game:GetService("Players").LocalPlayer.Character.Humanoid.WalkToPoint = findClosestPlayer().Character["HumanoidRootPart"].Position + Vector3.new(findClosestPlayer().Character.Humanoid.MoveDirection.X * 4, findClosestPlayer().Character.Humanoid.MoveDirection.Y, findClosestPlayer().Character.Humanoid.MoveDirection.Z * 5.5)
-until game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool") or findClosestPlayer().Character:FindFirstChildOfClass("Tool") == nil
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(findClosestPlayer().Character.HumanoidRootPart.Position.X, game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position.Y, findClosestPlayer().Character.HumanoidRootPart.Position.Z))
+if not findClosestPlayer().Character:FindFirstChildOfClass("Tool") then 
+game:GetService("Players").LocalPlayer.Character.Humanoid.AutoRotate = true 
+return end
 end
 end)
+end
 end)
 
 
