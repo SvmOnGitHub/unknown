@@ -382,7 +382,7 @@ spawn(function()
 while wait() do
 game:GetService("Players").LocalPlayer.Character.Humanoid.WalkToPoint = findClosestPlayer().Character["HumanoidRootPart"].Position + Vector3.new(findClosestPlayer().Character.Humanoid.MoveDirection.X * 4, findClosestPlayer().Character.Humanoid.MoveDirection.Y, findClosestPlayer().Character.Humanoid.MoveDirection.Z * 5.5)
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(findClosestPlayer().Character.HumanoidRootPart.Position.X, game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position.Y, findClosestPlayer().Character.HumanoidRootPart.Position.Z))
-if not findClosestPlayer().Character:FindFirstChildOfClass("Tool") then
+if game:GetService("Players").LocalPlayer.Ping.Value >= 400 or findClosestPlayer().Ping.Value >= 400 or not findClosestPlayer().Character:FindFirstChildOfClass("Tool") then
 game:GetService("Players").LocalPlayer.Character.Humanoid.AutoRotate = true
 return end
 end
