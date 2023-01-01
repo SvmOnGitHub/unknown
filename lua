@@ -647,6 +647,6 @@ end)
 else
 game:GetService("StarterGui"):SetCore("SendNotification",{	
 	Title = "Not Whitelisted",	
-	Text = "DM vSam#3678 On Discord To Whitelist",	
+	Text = "DM vSam#0001 On Discord To Whitelist",	
 })	
 end
